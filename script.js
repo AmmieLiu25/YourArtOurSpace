@@ -1,10 +1,7 @@
 window.addEventListener('load', () => {
-  // Wait for the intro animation to finish, then:
   setTimeout(() => {
-    // No need to hide .intro-title; it will now be in the top-right corner.
-    // Remove the hidden class from the overlay-text to show it after intro.
     document.body.classList.add('loaded');
-  }, 2000); // match animation duration + delay
+  }, 2000); 
 });
 
 // === DOM Elements ===
@@ -42,11 +39,9 @@ function showPopup(dot, userRect) {
       popupImage.style.display = "none";
     }
   
-    // Default position near user
     let popupLeft = userRect.left + userRect.width / 2 + 10;
     let popupTop = userRect.top - 10;
   
-    // Temporarily show the popup to get its size
     popup.style.display = "block";
     popup.style.opacity = "0";
     popup.style.left = "0px";
@@ -54,24 +49,20 @@ function showPopup(dot, userRect) {
   
     const popupRect = popup.getBoundingClientRect();
   
-    // Adjust horizontal if it overflows
     if (popupLeft + popupRect.width > window.innerWidth) {
-      popupLeft = window.innerWidth - popupRect.width - 20; // add padding
+      popupLeft = window.innerWidth - popupRect.width - 20; 
     }
     if (popupLeft < 0) {
       popupLeft = 50;
     }
   
-    // Adjust vertical if it overflows
     if (popupTop + popupRect.height > window.innerHeight) {
         popupTop = window.innerHeight - popupRect.height - 20;
       }
     if (popupTop < 10) {
-    // Not enough space above — show below the dot
     popupTop = userRect.bottom + 10;
       }
   
-    // Apply final position
     popup.style.left = `${popupLeft}px`;
     popup.style.top = `${popupTop}px`;
     popup.style.opacity = "1";
@@ -120,7 +111,7 @@ function isInsideDotCollision(userRect, dot, radius) {
   return distance < radius + userRect.width / 2;
 }
 
-// === Keyboard Movement Handler ===
+// === Keyboard Movement ===
 document.addEventListener("keydown", (e) => {
   let newX = posX;
   let newY = posY;
@@ -177,10 +168,8 @@ document.addEventListener("keydown", (e) => {
   updateUserDotPosition();
 });
 
-// === Initial Position ===
 updateUserDotPosition();
 
-// === Arrow Button Visual Feedback ===
 arrowButtons.forEach(btn => {
   btn.addEventListener('mouseleave', () => btn.classList.remove('pressed'));
   btn.addEventListener('mousedown', () => btn.classList.add('pressed'));
