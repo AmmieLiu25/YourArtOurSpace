@@ -1,0 +1,210 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  font-family: 'Helvetica', sans-serif;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-map {
+  width: 120vw;
+  height: 100vh;
+  object-fit: contain;
+  position: absolute;
+  top: 0;
+  left: -10vw;
+  z-index: 100; 
+  }
+
+  .user-dot {
+    position: absolute;
+    width: clamp(10px, 3vw, 40px);
+    height: clamp(10px, 3vw, 40px);
+    background-color: red;
+    border-radius: 50%;
+    z-index: 2;
+    transition: top 0.3s, left 0.3s;
+  }
+
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.4);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .interactive-dot {
+    width: clamp(10px, 1.5vw, 20px);
+    height: clamp(10px, 1.5vw, 20px);
+    background-color: blue;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    animation: pulse 2.5s infinite ease-in-out;
+  }
+  
+  .interactive-dot:hover {
+    transform: scale(1.8);
+    background-color: #00aaff;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.6);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+/* Intro Title Animation */
+.intro-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Align text to the right */
+  position: fixed;
+  top: 50%;
+  right: 0; /* Start from right */
+  text-align: right;
+  color: #0503E5;
+  font-size: clamp(2rem, 6vw, 5rem);
+  z-index: 1000;
+  animation: shrinkAndMove 3s forwards ease-in-out;
+}
+
+.intro-title:hover {
+  cursor: pointer;
+}
+
+.intro-title h1 {
+  margin: 0;
+  padding: 0 5px;
+}
+
+/* Animate only with `top` and `right` */
+@keyframes shrinkAndMove {
+  0% {
+    top: 50%;
+    right: 0;
+    font-size: clamp(2rem, 6vw, 5rem);
+  }
+  100% {
+    top: 20px;
+    right: 20px;
+    font-size: clamp(1rem, 3vw, 2rem);
+  }
+}
+
+
+
+.popup {
+  font-family: "Helvetica";
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #0503E5;
+  box-shadow: #0503E5;
+  z-index: 200;
+  width: 400px;
+}
+
+h3 {
+    color: #0503E5;
+    font-size: clamp(2rem, 0.5vw, 5em);
+}
+
+p{
+    font-weight: 100;
+}
+
+.popup button {
+  background-color: #0503E5;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#popup {
+    position: absolute;
+    background: white;
+    border: 1px solid #0503E5;
+    padding: 10px;
+    max-width: 200px;
+    border-radius: 8px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+  }
+
+  #popup-image {
+    max-width: 200px;
+    height: auto;
+    display: block;
+  }
+
+.wall {
+  position: absolute;
+  /*background-color: rgba(0, 0, 0, 0.2);  Optional: visualize walls */
+  z-index: 1; /* Behind user-dot and interactive-dot */
+  pointer-events: none; /* Makes sure they don’t block interactions */
+  border-radius: 4px; /* Optional: rounded edges */
+}
+
+#arrow-keys {
+    position: fixed;
+    bottom: 30px;
+    left: 40px; /* Moved to the left */
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    transform: scale(1.25); /* Scales up the entire keypad */
+  }
+  
+  .arrow-row {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+  }
+  
+  .arrow {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    background: #0503E5;
+    color: white; 
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+  }
+  
+  .arrow.pressed {
+    background: #ddd;
+    color: #0503E5;
+    transform: scale(0.9);
+  }
+  
